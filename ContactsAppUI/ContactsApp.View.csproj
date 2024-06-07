@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{215D475C-ED6D-4713-9CAE-5EB15361FC71}</ProjectGuid>
+    <ProjectGuid>{42925C47-7565-4470-AAAE-1A0BF2F9DDF5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ContactsAppUI</RootNamespace>
-    <AssemblyName>ContactsAppUI</AssemblyName>
+    <RootNamespace>ContactsApp.View</RootNamespace>
+    <AssemblyName>ContactsApp</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,12 +32,16 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ContactsApp_96x96.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Text.Json, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -64,7 +68,7 @@
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="MainForm.designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -74,6 +78,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ContactForm.resx">
       <DependentUpon>ContactForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.ja-JP.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -86,6 +93,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -102,9 +110,48 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ContactsApp\ContactsApp.csproj">
-      <Project>{a1a15c50-aa3f-4f50-944a-00dd942e58b8}</Project>
-      <Name>ContactsApp</Name>
+    <None Include="Resources\add_contact_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_contact_32x32_gray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_photo_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_photo_32x32_gray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\collapse_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_contact_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_contact_32x32_gray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info_48x48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\photo_placeholder_100x100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\remove_contact_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\remove_contact_32x32_gray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ContactsApp_96x96.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ContactsApp.Model\ContactsApp.Model\ContactsApp.Model.csproj">
+      <Project>{edba3537-5e79-481f-b188-37a34ffc78a9}</Project>
+      <Name>ContactsApp.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

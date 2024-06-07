@@ -10,33 +10,60 @@ namespace ContactsApp
 {
     public class ProjectSerializer
     {
-        /// <summary>
-        /// Сохраняет данные проекта в файл.
+        // <summary>
+        /// Свойство пути к файлу
         /// </summary>
-        /// <param name="data">Данные проекта для сохранения.</param>
-        /// <param name="fileload">Путь к файлу для сохранения.</param>
-        public static void SaveToFile(Project data, string fileload)
+        public string Filename { get; set; }
+
+
+
+        /// <summary>
+        /// Сохранение данных в файл
+        /// </summary>
+        /// <param name="project"></param>
+        public void SaveToFile(Project project)
         {
+            Filename = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Mikhail\\ContactsApp";
             JsonSerializer serializer = new JsonSerializer();
-            using (StreamWriter sw = new StreamWriter(fileload))
-            using (JsonWriter writer = new JsonTextWriter(sw))
+            if (Directory.Exists(Filename) == false)
             {
-                serializer.Serialize(writer, data);
+                Directory.CreateDirectory(Filename);
+            }
+
+            using (StreamWriter streamWriter = new StreamWriter(Filename + "\\data.txt"))
+            using (JsonWriter writer = new JsonTextWriter(streamWriter))
+            {
+                serializer.Serialize(writer, project);
             }
         }
 
         /// <summary>
-        /// Загружает данные проекта из файла.
+        /// Загрузка в проект данные из файла
         /// </summary>
-        /// <param name="fileload">Путь к файлу для загрузки.</param>
-        /// <returns>Десериализованный объект проекта.</returns>
-        public static Project LoadFromFile(string fileload)
+        /// <returns></returns>
+        public Project LoadFromFile()
         {
+            Filename = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
+            + "\\Mikhail\\ContactsApp";
             JsonSerializer serializer = new JsonSerializer();
-            using (StreamReader sr = new StreamReader(fileload))
-            using (JsonReader reader = new JsonTextReader(sr))
+
+            Project project = null;
+
+            try
             {
-                return serializer.Deserialize<Project>(reader);
+                using (StreamReader sr = new StreamReader(Filename + "\\data.txt"))
+                using (JsonReader reader = new JsonTextReader(sr))
+                {
+                    //Вызываем десериализацию и явно преобразуем результат в целевой тип данных
+                    project = serializer.Deserialize<Project>(reader);
+                }
+
+                return project ?? new Project();
+
+            }
+            catch
+            {
+                return new Project();
             }
         }
     }
